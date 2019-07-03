@@ -1,18 +1,21 @@
-function [] = fengefeishizhi()
-clear all;
-close all;
-clc
+%% 分割肺实质
+% origin_dir: 源文件夹
+% dest_dir: 目标文件夹
+function [] = fengefeishizhi(origin_dir, dest_dir)
 tic
-
+disp(strcat('开始分割',origin_dir, ' 到 ', dest_dir));
 %jpg数据格式的存储路径
-str = 'E:\matlab\segmentation\dataset\jpg\0001\*.jpg';
+% origin_jpg_path = 'dataset\jpg\0001\*.jpg';
 %分割好肺实质后的图片存储路径
-str2='E:\matlab\segmentation\dataset\jpg_fenge\0001\';
-imagelist = dir(str);
+% split_path='dataset\jpg_fenge\0001\';
+if exist(dest_dir, 'dir')==0   %该文件夹不存在，则直接创建
+    mkdir(dest_dir);
+end
+imagelist = dir([origin_dir, '*.jpg']);
 
 for i = 1:length(imagelist)
     name=imagelist(i).name;
-    dirname = strcat('E:\matlab\segmentation\dataset\jpg\0001\',name);
+    dirname = strcat(origin_dir, name);
     A=imread(dirname);%读取原图像
     B=rgb2gray(A);%将原图像转换为灰度图像
     %figure,imshow(B,[]),title('图像导入后显示'); %显示导入的图像
@@ -121,10 +124,11 @@ for i = 1:length(imagelist)
     lung=immultiply(lungmask,B);%相与,得到的是灰度值从0到max-min+1的灰度图像
     %figure;imshow(lung,[]),title('提取的肺实质');
     %name = + name;
-     feishizhi = [str2,name];
+     feishizhi = [dest_dir, name];
      imwrite(lung,feishizhi);
         %break
-    end
+end
+toc
 %   
 % 
 % 

@@ -49,7 +49,7 @@ end
 %figure(),imshow(img1,[]),title('存入图片');
 if total ~= img1_size(1)*img1_size(2)   %如果不全是黑*
     figure(),imshow(img1,[]),title('存入图片');
-    pngname = ['E:\matlab\segmentation\dataset\result\0001\',num2str(m), '.png'];
+    pngname = ['dataset\result\0001\',num2str(m), '.png'];
     imwrite(img1, pngname, 'png');    %存入图片*
 end
 

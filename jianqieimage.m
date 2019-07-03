@@ -1,11 +1,13 @@
 function [] = jianqieimage()
-close all;
-clear;
-clc;
+
 %肺实质的图片
-image_path = 'E:\matlab\segmentation\dataset\jpg_fenge\0001\';
+image_path = 'dataset\jpg_fenge\0001\';
 %肺结节的位置信息和良恶性程度
-xls_path = 'E:\matlab\segmentation\dataset\xls\0001\1.xls';
+xls_path = 'dataset\xls\0001\1.xls';
+result_folder = 'dataset\result\0001\';
+if exist(result_folder, 'dir')==0   %该文件夹不存在，则直接创建
+    mkdir(result_folder);
+end
 [txt,num,alldata] = xlsread(xls_path);
 xls_num = size(alldata);
 xls_num(1);

@@ -1,8 +1,6 @@
 function [num_mal,sop_text,max_min_xy]=readxml(xml_path)
 
-clear all
-clc
-xml_path='E:\matlab\segmentation\dataset\dicom\0001\069.xml';
+xml_path='dataset\dicom\0001\069.xml';
 %%xml_path = 'E:\matlab\segmentation\dataset\jpg_fenge\test\248.xml';
 %% 跳转到内层标签unblindedReadNodule
 docNode = xmlread(xml_path);     %读取XML文件返回一个文件模型节点*  
