@@ -1,14 +1,5 @@
-function jianqie(img_path,dir,times,size_center,col4xy,m)
+function jianqie(img_path,dir,times,size_center,col4xy,num)
    %dir 为患病可能程度，col4xy为剪切区域
-%    function jianqie()
-%    dir=3;
-%    times=4;
-%    size_center=[0 0 8];
-%    col4xy=[106 197 32 32];
-    %train_path = 'E:\matlab\segmentation\dataset\result\0503\1.jpg';
-    %result_name = [img_path(24:37),'_',char(num2str(dir)),'_',char(num2str(times)),img_path(38:46)];
-    %train_path = [train_path,char(num2str(dir)),'\',result_name];  %剪切路径*
-    %img_path='E:\matlab\segmentation\dataset\jpg_fenge\test\000180.jpg';
     img=imread(img_path);  %读取图片文件*
     img1=imcrop(img,col4xy);   %返回图像的一个裁剪区域*  I2=imcrop(I,[a b c d]);%利用裁剪函数裁剪图像，其中，
     %（a,b）表示裁剪后左上角像素在原图像中的位置；c表示裁剪后图像的宽，d表示裁剪后图像的高
@@ -32,7 +23,7 @@ function jianqie(img_path,dir,times,size_center,col4xy,m)
                 img1(i,j) = 0;
             end
             if D(i,j) == 1 %二值图像当值为1时  （白色）
-                if ~(i > size_center(1) && j > size_center(1)&& j < size_center(1) + size_center(3)&& i < size_center(1) + size_center(3))    %不在范围内*？
+                if ~(i > size_center(1) && j > size_center(1)&& j < size_center(1) + size_center(3)&& i < size_center(1) + size_center(3))%不在范围内*？
                      img1(i,j) = 0; %取为黑色*
                 end
             end
@@ -49,10 +40,10 @@ end
 %figure(),imshow(img1,[]),title('存入图片');
 if total ~= img1_size(1)*img1_size(2)   %如果不全是黑*
     figure(),imshow(img1,[]),title('存入图片');
-    pngname = ['dataset\result\0001\',num2str(m), '.png'];
+    pngname = ['dataset\result\0001\',num2str(num), '.png'];
     imwrite(img1, pngname, 'png');    %存入图片*
 end
-
+end
 
 
 

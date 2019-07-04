@@ -128,10 +128,8 @@ for i = 1:length(imagelist)
      imwrite(lung,feishizhi);
         %break
 end
-toc
-%   
-% 
-% 
+end
+
 
 
 
