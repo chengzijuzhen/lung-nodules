@@ -20,4 +20,3 @@ end
 % origin_jpg_path =  'dataset\jpg\0001\*.jpg';
 % dcm_path = 'dataset\dicom\0001\';
 % readdicom(dcm_path);
-toc

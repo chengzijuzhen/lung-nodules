@@ -1,13 +1,14 @@
 %% 分割肺实质
 % origin_dir: 源文件夹
 % dest_dir: 目标文件夹
-function [] = fengefeishizhi(origin_dir, dest_dir)
-tic
-disp(strcat('开始分割',origin_dir, ' 到 ', dest_dir));
+function [] = fengefeishizhi()
+%function [] = fengefeishizhi(origin_dir, dest_dir)
+
+%disp(strcat('开始分割',origin_dir, ' 到 ', dest_dir));
 %jpg数据格式的存储路径
-% origin_jpg_path = 'dataset\jpg\0001\*.jpg';
+origin_dir = 'E:\matlab\segmentation\dataset\01\jpg\0002\';
 %分割好肺实质后的图片存储路径
-% split_path='dataset\jpg_fenge\0001\';
+dest_dir='E:\matlab\segmentation\dataset\01\jpg_fenge\0002\';
 if exist(dest_dir, 'dir')==0   %该文件夹不存在，则直接创建
     mkdir(dest_dir);
 end

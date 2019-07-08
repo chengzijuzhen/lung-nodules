@@ -1,10 +1,10 @@
 function [] = jianqieimage()
 close all;
 %肺实质的图片
-image_path = 'dataset\jpg_fenge\0001\';
+image_path = 'dataset\01\jpg_fenge\0002\';
 %肺结节的位置信息和良恶性程度
-xls_path = 'dataset\xls\0001\1.xls';
-result_folder = 'dataset\result\0001\';
+xls_path = 'dataset\01\xls\2.xls';
+result_folder = 'dataset\01\result\0002\';
 if exist(result_folder, 'dir')==0   %该文件夹不存在，则直接创建
     mkdir(result_folder);
 end

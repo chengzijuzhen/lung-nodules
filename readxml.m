@@ -1,6 +1,6 @@
-function [sop_text,max_min_xy,malignent,num_mal]=readxml(xml_path)
-
-    xml_path='dataset\dicom\0001\069.xml';
+%function [sop_text,max_min_xy,malignent,num_mal]=readxml(xml_path)
+function [sop_text,max_min_xy,num_mal]=readxml(xml_path)
+    xml_path='dataset\01\dicom\0002\072.xml';
     %%xml_path = 'E:\matlab\segmentation\dataset\jpg_fenge\test\248.xml';
     %% 跳转到内层标签unblindedReadNodule
     docNode = xmlread(xml_path);     %读取XML文件返回一个文件模型节点*  
@@ -8,7 +8,7 @@ function [sop_text,max_min_xy,malignent,num_mal]=readxml(xml_path)
     readingSession = document.getElementsByTagName('readingSession');  %返回与给定的元素所有子节点的Nodelist对象*
     %% 最后返回的三个值
     %% 最后返回的三个值
-    malignent=[];% %每个结节的恶性度
+    %malignent=[];% %每个结节的恶性度
     num_mal = []; %每个结节的恶性度和属于该类别的图片的数量
     sop_text = {}; %每个图片的标号
     max_min_xy = []; %每个图像中肺结节的x和y的最小值和最大值
@@ -17,9 +17,10 @@ function [sop_text,max_min_xy,malignent,num_mal]=readxml(xml_path)
     for r = 0:readingSession.getLength()-1
         %unblindedReadNodule一个节点标记，<unblindedReadNodule>节点数据包括在</unblindedReadNodule>*
         unblinded_nodule = readingSession.item(r).getElementsByTagName('unblindedReadNodule');
-        m=unblinded_nodule.item(0).getElementsByTagName('malignancy');
-        m_int=str2num(char(m.item(0).getTextContent()));
-        malignent=[malignent();m_int];
+%         unblinded_nodule.item
+%         m=unblinded_nodule.item(0).getElementsByTagName('malignancy');
+%         m_int=str2num(char(m.item(0).getTextContent()));
+%         malignent=[malignent();m_int];
 
         for u = 0 : unblinded_nodule.getLength()-1
             roi = unblinded_nodule.item(u).getElementsByTagName('roi');   %item() 方法可返回节点列表中处于指定索引号的节点。*<roi>结节轮廓</roi>*
@@ -61,7 +62,7 @@ function [sop_text,max_min_xy,malignent,num_mal]=readxml(xml_path)
                 continue;
         end
         %fprintf('num_mal: %d\n',num_mal())
-        fprintf('malignent: %d\n',malignent())
+        %fprintf('malignent: %d\n',malignent())
         %num_mal = [num_mal();0,0];    %扩展维数*
     end
 end

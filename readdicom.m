@@ -6,13 +6,15 @@ dicom_path='dataset\dicom\';
 dicom_path_cell = strsplit(dicom_path, 'dicom');
 %创建读取xml结果的xls目录
 %xls_folder = strcat('dataset\xls', dicom_path_cell{2});
-xls_folder = 'E:\matlab\segmentation\dataset\xls\0001\';
+xls_folder = 'dataset\01\xls\';
 if exist(xls_folder, 'dir')==0   %该文件夹不存在，则直接创建
     mkdir(xls_folder);
 end
 
 %读取xml文件，并解析其内容
-[sop_text,max_min_xy,malignent,num_mal]=readxml(dicom_path);  %函数调用
+%[sop_text,max_min_xy,malignent,num_mal]=readxml(dicom_path);  %函数调用
+
+[sop_text,max_min_xy,num_mal]=readxml(dicom_path);  %函数调用
 %  num_mal = []; %每个结节的恶性度和属于该类别的图片的数量
 %  sop_text = { }; %每个图片的标号
 % max_min_xy = []; %每个图像中肺结节的x和y的最小值和最大值
@@ -40,10 +42,10 @@ end
 
 %---------------------------------读取dicom文件-------------------------------------
 %dcm_files = dir(strcat(dicom_path,'\*.dcm')); % 获得文件列表
-dcm_files=dir('dataset\dicom\0001\*.dcm');
+dcm_files=dir('dataset\01\dicom\0002\*.dcm');
 for j = 1:numel(dcm_files) %遍历文件
     dicomname=dcm_files(j).name;
-    dirname = strcat('dataset\dicom\0001\',dicomname);
+    dirname = strcat('dataset\01\dicom\0002\',dicomname);
     dicomInformation = dicominfo(dirname); %存储图片信息
     %fprintf('dirname: %s\n',dirname)
     instance = dicomInformation.SOPInstanceUID;%唯一ID
@@ -57,9 +59,9 @@ for j = 1:numel(dcm_files) %遍历文件
         end
     end
 end
- fprintf('malignent: %d\n',malignent)
-total = [dcm_number,max_min_xy,malignent,num_mal];
-xlswrite(strcat(xls_folder, '1.xls'),total); %导入到表格中
+% fprintf('malignent: %d\n',malignent)
+total = [dcm_number,max_min_xy,num_mal];
+xlswrite(strcat(xls_folder, '2.xls'),total); %导入到表格中
 
 end
 
