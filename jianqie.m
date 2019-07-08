@@ -40,7 +40,7 @@ end
 %figure(),imshow(img1,[]),title('存入图片');
 if total ~= img1_size(1)*img1_size(2)   %如果不全是黑*
     figure(),imshow(img1,[]),title('存入图片');
-    pngname = ['dataset\result\0001\',num2str(num), '.png'];
+    pngname = ['dataset\01\result\0002\',num2str(num), '.png'];
     imwrite(img1, pngname, 'png');    %存入图片*
 end
 end
