@@ -1,7 +1,8 @@
-function [sop_text,max_min_xy,malignent,num_mal]=readxml(xml_path)
+function [sop_text,max_min_xy,malignent,num_mal]=readxml(dicom_path)
 %function [sop_text,max_min_xy,num_mal]=readxml(xml_path)
     %xml_path='dataset\01\dicom\0002\072.xml';
-   
+   list = dir([dicom_path, '*.xml']);
+   xml_path = [dicom_path, list(1).name]
     %% 跳转到内层标签unblindedReadNodule
     docNode = xmlread(xml_path);     %读取XML文件返回一个文件模型节点*  
     document = docNode.getDocumentElement();
