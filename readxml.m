@@ -1,14 +1,14 @@
-%function [sop_text,max_min_xy,malignent,num_mal]=readxml(xml_path)
-function [sop_text,max_min_xy,num_mal]=readxml(xml_path)
-    xml_path='dataset\01\dicom\0002\072.xml';
-    %%xml_path = 'E:\matlab\segmentation\dataset\jpg_fenge\test\248.xml';
+function [sop_text,max_min_xy,malignent,num_mal]=readxml(xml_path)
+%function [sop_text,max_min_xy,num_mal]=readxml(xml_path)
+    %xml_path='dataset\01\dicom\0002\072.xml';
+   
     %% 跳转到内层标签unblindedReadNodule
     docNode = xmlread(xml_path);     %读取XML文件返回一个文件模型节点*  
     document = docNode.getDocumentElement();
     readingSession = document.getElementsByTagName('readingSession');  %返回与给定的元素所有子节点的Nodelist对象*
     %% 最后返回的三个值
     %% 最后返回的三个值
-    %malignent=[];% %每个结节的恶性度
+    malignent=[];% %每个结节的恶性度
     num_mal = []; %每个结节的恶性度和属于该类别的图片的数量
     sop_text = {}; %每个图片的标号
     max_min_xy = []; %每个图像中肺结节的x和y的最小值和最大值
@@ -35,7 +35,8 @@ function [sop_text,max_min_xy,num_mal]=readxml(xml_path)
             Num_roi = roi.getLength();   %该类别的图片的数量
             mal_int = str2num(char(mal.item(0).getTextContent()));        
             num_mal = [num_mal();mal_int,Num_roi];         
-            for i = 0 : Num_roi-1  %遍历*        
+            for i = 0 : Num_roi-1  %遍历*     
+                malignent=[malignent();mal_int];%每张图片恶性度
                 sop_id = roi.item(i).getElementsByTagName('imageSOP_UID');    %图片编号*  
                 sop_text{sop_num + i + 1} = char(sop_id.item(0).getTextContent());   %数组*
                 edgeMap = roi.item(i).getElementsByTagName('edgeMap');   %边界* 

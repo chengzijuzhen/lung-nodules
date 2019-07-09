@@ -1,4 +1,4 @@
-function jianqie(img_path,dir,times,size_center,col4xy,num)
+function jianqie(img_path,malignent,size_center,col4xy,num)
    %dir 为患病可能程度，col4xy为剪切区域
     img=imread(img_path);  %读取图片文件*
     img1=imcrop(img,col4xy);   %返回图像的一个裁剪区域*  I2=imcrop(I,[a b c d]);%利用裁剪函数裁剪图像，其中，
@@ -12,7 +12,7 @@ function jianqie(img_path,dir,times,size_center,col4xy,num)
     %figure(),imshow(C,[]),title('显示二值化图像');%显示二值化图像
     D=imfill(C,4,'holes');%对二值化后的图像填充肺实质
     %figure(),imshow(D,[]),title('显示填充肺实质');%显示填充肺实质
-    if dir >=4    %大概率为肺癌*
+    if malignent >=4    %大概率为肺癌*
         FMask=bwareaopen(D,10);  %除二值图像中面积小于10的对象  
         D = FMask;
     end
@@ -40,8 +40,13 @@ end
 %figure(),imshow(img1,[]),title('存入图片');
 if total ~= img1_size(1)*img1_size(2)   %如果不全是黑*
     figure(),imshow(img1,[]),title('存入图片');
-    pngname = ['dataset\01\result\0002\',num2str(num), '.png'];
+    if malignent<=2
+    pngname = ['dataset\01\result\benign\','0002-',num2str(num), '.png'];
+    imwrite(img1, pngname, 'png'); 
+    else
+    pngname = ['dataset\01\result\malignent\','0002-',num2str(num), '.png'];   
     imwrite(img1, pngname, 'png');    %存入图片*
+    end
 end
 end
 
