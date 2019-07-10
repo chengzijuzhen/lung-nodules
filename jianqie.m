@@ -1,4 +1,4 @@
-function jianqie(img_path,malignent,size_center,col4xy,num)
+function jianqie(img_path,malignent,size_center,col4xy,img_name,num,result_folder,dirname)
    %dir 为患病可能程度，col4xy为剪切区域
     img=imread(img_path);  %读取图片文件*
     img1=imcrop(img,col4xy);   %返回图像的一个裁剪区域*  I2=imcrop(I,[a b c d]);%利用裁剪函数裁剪图像，其中，
@@ -39,14 +39,15 @@ for m = 1:img1_size(1)
 end
 %figure(),imshow(img1,[]),title('存入图片');
 if total ~= img1_size(1)*img1_size(2)   %如果不全是黑*
-    figure(),imshow(img1,[]),title('存入图片');
+    %figure(),imshow(img1,[]),title('存入图片');
     if malignent<=2
-    pngname = ['dataset\01\result\benign\','0002-',num2str(num), '.png'];
+    %dirname,表示case编号,img_name,表示图片编号，num,表示结节编号（有时一张图片有多个结节）
+    pngname = [result_folder,'benign\',dirname,'-',img_name,'-',num2str(num), '.png'];
     imwrite(img1, pngname, 'png'); 
     else
-    pngname = ['dataset\01\result\malignent\','0002-',num2str(num), '.png'];   
+    pngname = [result_folder,'malignent\',dirname,'-',img_name,'-',num2str(num), '.png'];
     imwrite(img1, pngname, 'png');    %存入图片*
-    end
+    end   
 end
 end
 

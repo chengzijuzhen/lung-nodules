@@ -7,7 +7,8 @@ end
 %读取xml文件，并解析其内容
 [sop_text,max_min_xy,malignent,num_mal]=readxml(dicom_path);  %函数调用
 
-%[sop_text,max_min_xy,num_mal]=readxml(dicom_path);  %函数调用
+%[sop_text,max_min_xy,malignent,num_mal]=readxml(dicom_path);  %函数调用
+% malignent=[]%每张图片中结节的恶性度
 %  num_mal = []; %每个结节的恶性度和属于该类别的图片的数量
 %  sop_text = { }; %每个图片的标号
 % max_min_xy = []; %每个图像中肺结节的x和y的最小值和最大值
@@ -37,19 +38,22 @@ end
 dcm_files=dir([dicom_path, '*.dcm']);  % 获得文件列表
 % dcm_files=dir('dataset\01\dicom\0002\*.dcm');
 for j = 1:numel(dcm_files) %遍历文件
-    dirname = strcat(dicom_path,dcm_files(j).name);
+    dicomname=dcm_files(j).name;
+    dirname = strcat(dicom_path,dicomname);
     dicomInformation = dicominfo(dirname); %存储图片信息
     instance = dicomInformation.SOPInstanceUID;
-    imagenum = dicomInformation.InstanceNumber;
     % Make sure that the StudyInstanceUID matches that found in
     % the XML annotations
     for s = 1 : sop_num(2)    %对比
         if strcmpi(instance,sop_text(1,s))
-            dcm_number(s) = imagenum; %将dicom图片编号保存
+           dcm_number(s) = str2num(dicomname(1:end-4));
         end
     end
 end
-total = [dcm_number,max_min_xy,num_mal];
+total = [dcm_number,max_min_xy,malignent,num_mal];
+if isempty(total)
+    return
+end
 xlswrite(strcat(xls_folder, filename, '.xls'),total); %导入到表格中
 
 end

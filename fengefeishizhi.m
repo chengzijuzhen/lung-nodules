@@ -2,13 +2,13 @@
 % origin_dir: 源文件夹
 % dest_dir: 目标文件夹
 function [] = fengefeishizhi(origin_dir, dest_dir)
-%function [] = fengefeishizhi()
+% function [] = fengefeishizhi()
 tic
-
-% %jpg数据格式的存储路径
-% %origin_dir = 'E:\matlab\segmentation\dataset\01\jpg\0050\';
-% %分割好肺实质后的图片存储路径
-% %dest_dir='E:\matlab\segmentation\dataset\01\jpg_fenge\0050\';
+% 
+% % %jpg数据格式的存储路径
+% origin_dir = 'E:\matlab\segmentation\dataset\01\jpg\0009\';
+% % %分割好肺实质后的图片存储路径
+% dest_dir='E:\matlab\segmentation\dataset\01\jpg_fenge\0009\';
 
 disp(strcat('开始分割',origin_dir, ' 到 ', dest_dir));
 
